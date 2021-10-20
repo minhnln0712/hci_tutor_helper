@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_task_planner_app/screens/add_student.dart';
 import 'package:flutter_task_planner_app/screens/calendar_page.dart';
 import 'package:flutter_task_planner_app/screens/choose_student.dart';
 import 'package:flutter_task_planner_app/screens/google_map_screen.dart';
 import 'package:flutter_task_planner_app/theme/colors/light_colors.dart';
+import 'package:flutter_task_planner_app/utils/db/datebase.dart';
 import 'package:flutter_task_planner_app/widgets/drawer.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -11,6 +15,11 @@ import 'package:flutter_task_planner_app/widgets/active_project_card.dart';
 import 'package:flutter_task_planner_app/widgets/top_container.dart';
 
 class HomePage extends StatelessWidget {
+  getStudents() async {
+    final students = await DatabaseProvider.db.getStudents();
+    return students;
+  }
+
   Text subheading(String title) {
     return Text(
       title,
@@ -181,44 +190,45 @@ class HomePage extends StatelessWidget {
                           SizedBox(height: 5.0),
                           Wrap(
                             children: [
-                              TextButton(
-                                onPressed: () {
-                                  print("student1");
-                                },
-                                child: ActiveProjectsCard(
-                                  cardColor: LightColors.kGreen,
-                                  imgLink: "assets/images/student1.jpg",
-                                  name: 'Quốc Trung',
-                                  subject: 'Anh',
-                                  grade: "5",
-                                ),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  print("student2");
-                                },
-                                child: ActiveProjectsCard(
-                                  cardColor: LightColors.kRed,
-                                  imgLink: "assets/images/student2.jpg",
-                                  name: 'Nhật Ánh',
-                                  subject: 'Văn',
-                                  grade: "3",
-                                ),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  print("student3");
-                                },
-                                child: ActiveProjectsCard(
-                                  cardColor: Colors.amber[800],
-                                  imgLink: "assets/images/student3.jpg",
-                                  name: 'Hải Dương',
-                                  subject: 'Toán',
-                                  grade: "5",
-                                ),
-                              ),
+                              FutureBuilder(
+                                  future: getStudents(),
+                                  // ignore: missing_return
+                                  builder: (context, studentData) {
+                                    if (studentData.hasData) {
+                                      return ListView.builder(
+                                          scrollDirection: Axis.vertical,
+                                          shrinkWrap: true,
+                                          itemCount: studentData.data.length,
+                                          itemBuilder: (context, index) {
+                                            return TextButton(
+                                              onPressed: () {
+                                                print(studentData.data[index]
+                                                    ["studentId"]);
+                                                print(studentData.data[index]
+                                                    ["fullName"]);
+                                              },
+                                              child: ActiveProjectsCard(
+                                                cardColor: LightColors.kGreen,
+                                                imgLink:
+                                                    "assets/images/student1.jpg",
+                                                name: studentData.data[index]
+                                                    ["fullName"],
+                                                subject: studentData.data[index]
+                                                    ["subjectId"],
+                                                grade: studentData.data[index]
+                                                    ["gradeId"],
+                                              ),
+                                            );
+                                          });
+                                    } else if (studentData.hasError) {
+                                      return Text("");
+                                    } else {
+                                      return Text(
+                                          "Bạn chưa nhập học sinh nào hết!");
+                                    }
+                                  })
                             ],
-                          ),
+                          )
                         ],
                       ),
                     ),
@@ -228,6 +238,12 @@ class HomePage extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.to(() => AddStudent());
+        },
+        child: Icon(Icons.person_add),
       ),
     );
   }

@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_task_planner_app/constants.dart';
 import 'package:flutter_task_planner_app/screens/components/cancel_button.dart';
 import 'package:flutter_task_planner_app/screens/components/login_form.dart';
-import 'package:flutter_task_planner_app/screens/components/register_form.dart';
+import 'package:flutter_task_planner_app/screens/components/login_form.dart';
+import 'package:flutter_task_planner_app/screens/components/login_form.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -94,13 +95,6 @@ class _LoginScreenState extends State<LoginScreen>
               animationDuration: animationDuration,
               size: size,
               defaultLoginSize: defaultLoginSize),
-
-          // Register Form
-          RegisterForm(
-              isLogin: isLogin,
-              animationDuration: animationDuration,
-              size: size,
-              defaultLoginSize: defaultRegisterSize),
         ],
       ),
     );

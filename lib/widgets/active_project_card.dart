@@ -3,14 +3,12 @@ import 'package:percent_indicator/percent_indicator.dart';
 
 class ActiveProjectsCard extends StatelessWidget {
   final Color cardColor;
-  final String imgLink;
   final String name;
   final String subject;
   final String grade;
 
   ActiveProjectsCard({
     this.cardColor,
-    this.imgLink,
     this.name,
     this.subject,
     this.grade,
@@ -21,46 +19,40 @@ class ActiveProjectsCard extends StatelessWidget {
     return Expanded(
       flex: 1,
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 10.0),
         padding: EdgeInsets.fromLTRB(20, 20, 20, 15),
-        height: 200,
-        width: 160,
+        height: 100,
+        width: 400,
         decoration: BoxDecoration(
           color: cardColor,
           borderRadius: BorderRadius.circular(40.0),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Image(
-              image: AssetImage(imgLink),
-              height: 100,
-              width: 100,
-            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  "Tên: $name",
+                  name,
                   style: TextStyle(
-                    fontSize: 14.0,
+                    fontSize: 15.0,
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
                 Text(
-                  "Môn: $subject",
+                  grade,
                   style: TextStyle(
-                    fontSize: 12.0,
+                    fontSize: 13.0,
                     color: Colors.white,
                     fontWeight: FontWeight.w800,
                   ),
                 ),
                 Text(
-                  "Khối: $grade",
+                  subject,
                   style: TextStyle(
-                    fontSize: 12.0,
+                    fontSize: 13.0,
                     color: Colors.white,
                     fontWeight: FontWeight.w800,
                   ),

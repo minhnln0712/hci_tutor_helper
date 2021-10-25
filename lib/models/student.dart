@@ -6,7 +6,7 @@ class Student {
   String phone;
   int subjectId;
   int gradeId;
-  DateTime createDate;
+  String createDate;
 
   Student(
       {this.studentId,

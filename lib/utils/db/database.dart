@@ -27,18 +27,18 @@ class DatabaseProvider {
         gradeId INTEGER PRIMARY KEY AUTOINCREMENT,
         gradeName TEXT
         )''');
-      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('1')");
-      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('2')");
-      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('3')");
-      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('4')");
-      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('5')");
-      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('6')");
-      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('7')");
-      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('8')");
-      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('9')");
-      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('10')");
-      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('11')");
-      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('12')");
+      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Lớp 1')");
+      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Lớp 2')");
+      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Lớp 3')");
+      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Lớp 4')");
+      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Lớp 5')");
+      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Lớp 6')");
+      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Lớp 7')");
+      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Lớp 8')");
+      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Lớp 9')");
+      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Lớp 10')");
+      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Lớp 11')");
+      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Lớp 12')");
       await db.execute('''
         CREATE TABLE tblSubject (
         subjectId INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -62,7 +62,7 @@ class DatabaseProvider {
       await db.rawInsert(
           "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Toán 3',3)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Anh',3)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Anh 3',3)");
       await db.rawInsert(
           "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Việt 4',4)");
       await db.rawInsert(
@@ -75,6 +75,48 @@ class DatabaseProvider {
           "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Toán 5',5)");
       await db.rawInsert(
           "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Anh 5',5)");
+      await db.rawInsert(
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Việt 6',6)");
+      await db.rawInsert(
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Toán 6',6)");
+      await db.rawInsert(
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Anh 6',6)");
+      await db.rawInsert(
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Việt 7',7)");
+      await db.rawInsert(
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Toán 7',7)");
+      await db.rawInsert(
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Anh 7',7)");
+      await db.rawInsert(
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Việt 8',8)");
+      await db.rawInsert(
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Toán 8',8)");
+      await db.rawInsert(
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Anh 8',8)");
+      await db.rawInsert(
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Việt 9',9)");
+      await db.rawInsert(
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Toán 9',9)");
+      await db.rawInsert(
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Anh 9',9)");
+      await db.rawInsert(
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Việt 10',10)");
+      await db.rawInsert(
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Toán 10',10)");
+      await db.rawInsert(
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Anh 10',10)");
+      await db.rawInsert(
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Việt 11',11)");
+      await db.rawInsert(
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Toán 11',11)");
+      await db.rawInsert(
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Anh 11',11)");
+      await db.rawInsert(
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Việt 12',12)");
+      await db.rawInsert(
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Toán 12',12)");
+      await db.rawInsert(
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Anh 12',12)");
       await db.execute('''
         CREATE TABLE tblStudent (
         studentId INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -112,6 +154,32 @@ class DatabaseProvider {
     }
   }
 
+  Future<int> getGradeIdbyGradeName(String gradeName) async {
+    final db = await database;
+    var response = await db.rawQuery(
+        "SELECT gradeId FROM tblGrade WHERE gradeName = '$gradeName'");
+    if (response.length == 0)
+      return null;
+    else {
+      var resultMap = response.toList();
+      int gradeId = resultMap[0]["gradeId"];
+      return gradeId != 0 ? gradeId : 0;
+    }
+  }
+
+  Future<String> getGradeNamebyGradeId(int gradeId) async {
+    final db = await database;
+    var response = await db
+        .rawQuery("SELECT gradeName FROM tblGrade WHERE gradeId = '$gradeId'");
+    if (response.length == 0)
+      return null;
+    else {
+      var resultMap = response.toList();
+      String gradeName = resultMap[0]["gradeName"];
+      return gradeName.isNotEmpty ? gradeName : 0;
+    }
+  }
+
   Future<dynamic> getSubjects(int gradeId) async {
     final db = await database;
     var response = await db.rawQuery(
@@ -125,6 +193,32 @@ class DatabaseProvider {
         listSubject.add(resultMap[i]["subjectName"]);
       }
       return listSubject.isNotEmpty ? listSubject : null;
+    }
+  }
+
+  Future<int> getSubjectIdbySubjectName(String subjectName) async {
+    final db = await database;
+    var response = await db.rawQuery(
+        "SELECT subjectId FROM tblSubject WHERE subjectName = '$subjectName'");
+    if (response.length == 0)
+      return null;
+    else {
+      var resultMap = response.toList();
+      int subjectId = resultMap[0]["subjectId"];
+      return subjectId != 0 ? subjectId : 0;
+    }
+  }
+
+  Future<String> getSubjectNamebySubjectId(int subjectId) async {
+    final db = await database;
+    var response = await db.rawQuery(
+        "SELECT subjectName FROM tblSubject WHERE subjectId = '$subjectId'");
+    if (response.length == 0)
+      return null;
+    else {
+      var resultMap = response.toList();
+      String subjectName = resultMap[0]["subjectName"];
+      return subjectName.isNotEmpty ? subjectName : 0;
     }
   }
 

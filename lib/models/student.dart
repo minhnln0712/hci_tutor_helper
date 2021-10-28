@@ -7,6 +7,7 @@ class Student {
   int subjectId;
   int gradeId;
   String createDate;
+  bool status;
 
   Student(
       {this.studentId,
@@ -16,7 +17,8 @@ class Student {
       this.phone,
       this.subjectId,
       this.gradeId,
-      this.createDate});
+      this.createDate,
+      this.status});
 
   Map<String, dynamic> toMap() {
     return ({
@@ -28,6 +30,7 @@ class Student {
       "subjectId": subjectId,
       "gradeId": gradeId,
       "createDate": createDate,
+      "status": status,
     });
   }
 }

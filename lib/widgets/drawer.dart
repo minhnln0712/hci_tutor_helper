@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_task_planner_app/screens/login.dart';
+import 'package:flutter_task_planner_app/screens/home_page.dart';
+import 'package:flutter_task_planner_app/screens/login_page.dart';
 import 'package:flutter_task_planner_app/theme/colors/light_colors.dart';
 import 'package:get/get.dart';
 
@@ -22,36 +23,40 @@ class _AppDrawerState extends State<AppDrawer> {
               padding: EdgeInsets.all(10.0),
               children: [
                 ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    Get.offAll(() => HomePage());
+                  },
                   leading: Icon(
                     Icons.home,
                     color: Colors.white,
                   ),
                   title: Text(
-                    'Home',
+                    'Home Page',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
                 ListTile(
+                  onTap: () {},
                   leading: Icon(
                     Icons.person,
                     color: Colors.white,
                   ),
                   title: Text(
-                    'Profile',
+                    'Your Profile',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
-                ListTile(
-                  leading: Icon(
-                    Icons.settings,
-                    color: Colors.white,
-                  ),
-                  title: Text(
-                    'Setting',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
+                // ListTile(
+                //   onTap: () {},
+                //   leading: Icon(
+                //     Icons.settings,
+                //     color: Colors.white,
+                //   ),
+                //   title: Text(
+                //     'Setting',
+                //     style: TextStyle(color: Colors.white),
+                //   ),
+                // ),
                 ListTile(
                   onTap: () {
                     Get.offAll(() => LoginScreen());
@@ -61,7 +66,7 @@ class _AppDrawerState extends State<AppDrawer> {
                     color: Colors.white,
                   ),
                   title: Text(
-                    'Log out',
+                    'Logout',
                     style: TextStyle(color: Colors.white),
                   ),
                 ),

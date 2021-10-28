@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,14 +9,15 @@ import 'package:flutter_task_planner_app/theme/colors/light_colors.dart';
 import 'package:flutter_task_planner_app/utils/db/database.dart';
 import 'package:flutter_task_planner_app/widgets/drawer.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
-class AddStudent extends StatefulWidget {
+class UpdateStudent extends StatefulWidget {
   @override
-  State<AddStudent> createState() => _AddStudentState();
+  State<UpdateStudent> createState() => _UpdateStudentState();
 }
 
-class _AddStudentState extends State<AddStudent> {
-  var data = Get.arguments;
+class _UpdateStudentState extends State<UpdateStudent> {
+  var data_from_view_page = Get.arguments;
   List<String> listGrade = [];
   List<String> listSubject = [];
   String listGradeItems = "";
@@ -24,11 +26,11 @@ class _AddStudentState extends State<AddStudent> {
   int subjectId = 0;
   String fullName = "";
   String address = "";
-  String imageLink = "";
   String phoneNumber = "";
-  int gradeNow = 1;
+  int gradeNow = 0;
   bool firstTime = true;
   bool gradeChanged = false;
+  String imageLink = "";
 
   _getGrade() async {
     final students = await DatabaseProvider.db.getGrades();
@@ -54,7 +56,6 @@ class _AddStudentState extends State<AddStudent> {
   var _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       key: _scaffoldKey,
       endDrawer: new AppDrawer(),
@@ -68,6 +69,16 @@ class _AddStudentState extends State<AddStudent> {
   }
 
   Expanded _body() {
+    gradeId = data_from_view_page["gradeId"];
+    subjectId = data_from_view_page["subjectId"];
+    fullName = data_from_view_page["fullName"];
+    address = data_from_view_page["address"];
+    phoneNumber = data_from_view_page["phone"];
+    if (firstTime) {
+      gradeNow = data_from_view_page["gradeId"];
+    }
+    imageLink = data_from_view_page["imageLink"];
+    var imageDisplay = Image.file(File(data_from_view_page["imageLink"]));
     return Expanded(
       child: SingleChildScrollView(
         child: Column(
@@ -77,34 +88,56 @@ class _AddStudentState extends State<AddStudent> {
               padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
               child: Column(
                 children: <Widget>[
-                  subheading('Thông tin học sinh'),
+                  subheading('Student Information'),
                   SizedBox(height: 5.0),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Tên học sinh:"),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 200,
+                            child: InkWell(
+                              onTap: () async {
+                                chooseimage(File file) {
+                                  setState(() {
+                                    imageDisplay = Image.file(file);
+                                  });
+                                }
+
+                                final ImagePicker _picker = ImagePicker();
+                                final XFile image = await _picker.pickImage(
+                                    source: ImageSource.gallery);
+                                chooseimage(File(image.path));
+                                imageLink = image.path.toString();
+                              }, // Handle your callback.
+                              splashColor: Colors.brown.withOpacity(0.5),
+                              child: imageDisplay,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Text("Name:"),
                       TextFormField(
+                        initialValue: fullName,
                         keyboardType: TextInputType.text,
                         onChanged: (value) {
                           fullName = value;
                         },
                       ),
-                      Text("Địa chỉ:"),
+                      Text("Address:"),
                       TextFormField(
+                        initialValue: address,
                         keyboardType: TextInputType.text,
                         onChanged: (value) {
                           address = value;
                         },
                       ),
-                      Text("Link ảnh:"),
+                      Text("Phone Number:"),
                       TextFormField(
-                        keyboardType: TextInputType.text,
-                        onChanged: (value) {
-                          imageLink = value;
-                        },
-                      ),
-                      Text("Số điện thoại:"),
-                      TextFormField(
+                        initialValue: phoneNumber,
                         keyboardType: TextInputType.phone,
                         onChanged: (value) {
                           phoneNumber = value;
@@ -114,8 +147,8 @@ class _AddStudentState extends State<AddStudent> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text("Khối Lớp:"),
-                          Text("Môn Học:"),
+                          Text("Grade:"),
+                          Text("Subject:"),
                         ],
                       ),
                       Row(
@@ -128,9 +161,8 @@ class _AddStudentState extends State<AddStudent> {
                                 if (gradeData.hasData) {
                                   if (firstTime) {
                                     listGrade = gradeData.data;
-                                    listGradeItems = listGrade[0].toString();
-                                    gradeChanged = true;
-                                    gradeNow = 1;
+                                    listGradeItems =
+                                        data_from_view_page["gradeName"];
                                   }
                                   return DropdownButton(
                                     value: listGradeItems,
@@ -167,6 +199,10 @@ class _AddStudentState extends State<AddStudent> {
                                     listSubjectItems =
                                         listSubject[0].toString();
                                   }
+                                  if (firstTime) {
+                                    listSubjectItems =
+                                        data_from_view_page["subjectName"];
+                                  }
                                   firstTime = false;
                                   return DropdownButton(
                                     value: listSubjectItems,
@@ -192,7 +228,7 @@ class _AddStudentState extends State<AddStudent> {
                         ],
                       ),
                       SizedBox(
-                        height: 200,
+                        height: 100,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -205,7 +241,7 @@ class _AddStudentState extends State<AddStudent> {
                                   .getSubjectIdbySubjectName(listSubjectItems);
                               showAlertDialog(context);
                             },
-                            child: Text("Tạo học sinh"),
+                            child: Text("Update"),
                             style: TextButton.styleFrom(
                                 shape: StadiumBorder(),
                                 backgroundColor: Colors.cyan,
@@ -245,12 +281,16 @@ class _AddStudentState extends State<AddStudent> {
     Widget okButton = TextButton(
       child: const Text("OK"),
       onPressed: () {
-        Get.offAll(() => HomePage());
+        Get.back();
+        Get.back();
+        Get.back();
+        Get.back();
+        Get.back();
       },
     );
     AlertDialog secondAlert = AlertDialog(
-      title: const Text("Class Student!"),
-      content: const Text("The Student has been Created!!!"),
+      title: const Text("Attention!"),
+      content: const Text("The Student has been updated succesfully!"),
       actions: [
         okButton,
       ],
@@ -261,24 +301,17 @@ class _AddStudentState extends State<AddStudent> {
         Get.back();
       },
     );
-    Widget createButton = TextButton(
-      child: const Text("Create"),
+    Widget updateButton = TextButton(
+      child: const Text("Update"),
       onPressed: () async {
-        var newStudent = Student(
-            fullName: fullName,
-            address: address,
-            imageLink: imageLink,
-            createDate: DateTime.now().toString(),
-            gradeId: gradeId,
-            phone: phoneNumber,
-            subjectId: subjectId);
-        await DatabaseProvider.db.addNewStudent(newStudent);
-        // print(gradeId);
-        // print(subjectId);
-        // print(fullName);
-        // print(address);
-        // print(imageLink);
-        // print(phoneNumber);
+        await DatabaseProvider.db.updateStudent(
+            data_from_view_page["studentId"],
+            fullName,
+            address,
+            imageLink,
+            phoneNumber,
+            subjectId,
+            gradeId);
         showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -288,11 +321,11 @@ class _AddStudentState extends State<AddStudent> {
       },
     );
     AlertDialog firstAlert = AlertDialog(
-      title: const Text("Create student!"),
-      content: const Text("Are you sure you want to Create this student?"),
+      title: const Text("Update student!"),
+      content: const Text("Are you sure you want to Update this student?"),
       actions: [
         cancelButton,
-        createButton,
+        updateButton,
       ],
     );
     // show the dialog

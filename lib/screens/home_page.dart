@@ -1,9 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_task_planner_app/screens/add_student.dart';
+import 'package:flutter_task_planner_app/screens/student_add_page.dart';
 import 'package:flutter_task_planner_app/screens/calendar_page.dart';
-import 'package:flutter_task_planner_app/screens/choose_student.dart';
+import 'package:flutter_task_planner_app/screens/student_choose_page.dart';
 import 'package:flutter_task_planner_app/theme/colors/light_colors.dart';
 import 'package:flutter_task_planner_app/widgets/drawer.dart';
 import 'package:get/get.dart';
@@ -152,8 +152,8 @@ class _HomePageState extends State<HomePage> {
                               child: TaskColumn(
                                 icon: Icons.calendar_today,
                                 iconBackgroundColor: LightColors.kRed,
-                                title: 'Lịch Trình',
-                                subtitle: 'Kiểm tra công việc của bạn mỗi ngày',
+                                title: 'Calendar',
+                                subtitle: 'Checking your work daily!',
                               )),
                           SizedBox(height: 15.0),
                           TextButton(
@@ -164,8 +164,8 @@ class _HomePageState extends State<HomePage> {
                               child: TaskColumn(
                                 icon: Icons.blur_circular,
                                 iconBackgroundColor: LightColors.kDarkYellow,
-                                title: 'Dặn dò',
-                                subtitle: 'Những gì sẽ kiểm tra!',
+                                title: 'Note',
+                                subtitle: 'Notes about your students.',
                               )),
                           SizedBox(height: 15.0),
                           TextButton(
@@ -176,8 +176,8 @@ class _HomePageState extends State<HomePage> {
                             child: TaskColumn(
                               icon: Icons.location_on,
                               iconBackgroundColor: LightColors.kDarkBlue,
-                              title: 'Địa điểm',
-                              subtitle: 'Tìm đường tới vị trí của học sinh',
+                              title: 'Route',
+                              subtitle: "Find your way to Student's location.",
                             ),
                           ),
                           SizedBox(height: 15.0),
@@ -189,8 +189,9 @@ class _HomePageState extends State<HomePage> {
                             child: TaskColumn(
                               icon: Icons.note_alt_rounded,
                               iconBackgroundColor: Colors.green[900],
-                              title: 'Danh Sách',
-                              subtitle: 'Danh Sách Thông Tin Học Sinh',
+                              title: 'Student List',
+                              subtitle:
+                                  'A list of student with their information!',
                             ),
                           ),
                         ],

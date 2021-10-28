@@ -1,10 +1,11 @@
+import 'package:bordered_text/bordered_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_task_planner_app/constants.dart';
-import 'package:flutter_task_planner_app/screens/components/cancel_button.dart';
-import 'package:flutter_task_planner_app/screens/components/login_form.dart';
-import 'package:flutter_task_planner_app/screens/components/login_form.dart';
-import 'package:flutter_task_planner_app/screens/components/login_form.dart';
+import 'package:flutter_task_planner_app/screens/home_page.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -72,29 +73,36 @@ class _LoginScreenState extends State<LoginScreen>
                     color: kPrimaryColor),
               )),
 
-          // Cancel Button
-          CancelButton(
-            isLogin: isLogin,
-            animationDuration: animationDuration,
-            size: size,
-            animationController: animationController,
-            tapEvent: isLogin
-                ? null
-                : () {
-                    // returning null to disable the button
-                    animationController.reverse();
-                    setState(() {
-                      isLogin = !isLogin;
-                    });
-                  },
-          ),
-
           // Login Form
-          LoginForm(
-              isLogin: isLogin,
-              animationDuration: animationDuration,
-              size: size,
-              defaultLoginSize: defaultLoginSize),
+          SizedBox(
+            width: 420,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                BorderedText(
+                  strokeWidth: 5,
+                  strokeColor: Colors.black,
+                  child: Text(
+                    'Tutor Helper',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                        color: Colors.white),
+                  ),
+                ),
+                SvgPicture.asset('assets/images/login.svg'),
+                SizedBox(height: 60),
+                SignInButton(
+                  Buttons.GoogleDark,
+                  onPressed: () {
+                    Get.off(() => HomePage());
+                  },
+                ),
+                SizedBox(height: 10),
+              ],
+            ),
+          ),
         ],
       ),
     );

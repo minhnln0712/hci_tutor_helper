@@ -1,11 +1,11 @@
 import 'dart:developer';
 
+import 'package:flutter_task_planner_app/models/calendarevent.dart';
 import 'package:flutter_task_planner_app/models/grade.dart';
 import 'package:flutter_task_planner_app/models/note.dart';
 import 'package:flutter_task_planner_app/models/student.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
 
 class DatabaseProvider {
   DatabaseProvider._();
@@ -27,18 +27,18 @@ class DatabaseProvider {
         gradeId INTEGER PRIMARY KEY AUTOINCREMENT,
         gradeName TEXT
         )''');
-      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Lớp 1')");
-      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Lớp 2')");
-      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Lớp 3')");
-      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Lớp 4')");
-      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Lớp 5')");
-      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Lớp 6')");
-      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Lớp 7')");
-      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Lớp 8')");
-      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Lớp 9')");
-      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Lớp 10')");
-      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Lớp 11')");
-      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Lớp 12')");
+      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Grade 1')");
+      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Grade 2')");
+      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Grade 3')");
+      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Grade 4')");
+      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Grade 5')");
+      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Grade 6')");
+      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Grade 7')");
+      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Grade 8')");
+      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Grade 9')");
+      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Grade 10')");
+      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Grade 11')");
+      await db.rawInsert("INSERT INTO tblGrade(gradeName) VALUES('Grade 12')");
       await db.execute('''
         CREATE TABLE tblSubject (
         subjectId INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -46,77 +46,77 @@ class DatabaseProvider {
         gradeId INTEGER REFERENCES tblGrade(gradeId)
         )''');
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Việt 1',1)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Vietnamese 1',1)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Toán 1',1)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Math 1',1)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Anh 1',1)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('English 1',1)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Việt 2',2)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Vietnamese 2',2)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Toán 2',2)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Math 2',2)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Anh 2',2)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('English 2',2)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Việt 3',3)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Vietnamese 3',3)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Toán 3',3)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Math 3',3)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Anh 3',3)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('English 3',3)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Việt 4',4)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Vietnamese 4',4)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Toán 4',4)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Math 4',4)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Anh 4',4)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('English 4',4)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Việt 5',5)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Vietnamese 5',5)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Toán 5',5)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Math 5',5)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Anh 5',5)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('English 5',5)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Việt 6',6)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Literature 6',6)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Toán 6',6)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Math 6',6)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Anh 6',6)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('English 6',6)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Việt 7',7)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Literature 7',7)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Toán 7',7)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Math 7',7)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Anh 7',7)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('English 7',7)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Việt 8',8)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Literature 8',8)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Toán 8',8)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Math 8',8)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Anh 8',8)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('English 8',8)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Việt 9',9)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Literature 9',9)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Toán 9',9)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Math 9',9)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Anh 9',9)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('English 9',9)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Việt 10',10)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Literature 10',10)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Toán 10',10)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Math 10',10)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Anh 10',10)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('English 10',10)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Việt 11',11)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Literature 11',11)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Toán 11',11)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Math 11',11)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Anh 11',11)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('English 11',11)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Việt 12',12)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Literature 12',12)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Toán 12',12)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Math 12',12)");
       await db.rawInsert(
-          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('Tiếng Anh 12',12)");
+          "INSERT INTO tblSubject(subjectName,gradeId) VALUES('English 12',12)");
       await db.execute('''
         CREATE TABLE tblStudent (
         studentId INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -126,7 +126,8 @@ class DatabaseProvider {
         phone TEXT,
         subjectId INTEGER REFERENCES tblSubject(subjectId),
         gradeId INTEGER REFERENCES tblGrade(gradeId),
-        createDate DATE
+        createDate DATE,
+        status BIT
         )''');
       await db.execute('''
         CREATE TABLE tblNote (
@@ -134,6 +135,16 @@ class DatabaseProvider {
         title TEXT,
         body TEXT,
         createDate DATE,
+        studentId INTEGER REFERENCES tblStudent(studentId)
+        )''');
+      await db.execute('''
+        CREATE TABLE tblCalendarEvent (
+        eventId INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT,
+        description TEXT,
+        createDate DATE,
+        startTime DATE,
+        endTime DATE,
         studentId INTEGER REFERENCES tblStudent(studentId)
         )''');
     }, version: 1);
@@ -228,6 +239,25 @@ class DatabaseProvider {
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
+  updateStudent(int studentId, String fullName, String address,
+      String imageLink, String phone, int subjectId, int gradeId) async {
+    final db = await database;
+    await db.rawUpdate("""
+    UPDATE tblStudent\n
+    SET fullName = '$fullName',address = '$address',imageLink = '$imageLink',phone='$phone',subjectId=$subjectId,gradeId=$gradeId\n
+    WHERE studentId = $studentId\n
+    """);
+  }
+
+  deleteStudent(int studentId) async {
+    final db = await database;
+    await db.rawUpdate("""
+    UPDATE tblStudent 
+    SET status = 0  
+    WHERE studentId = $studentId 
+    """);
+  }
+
   Future<dynamic> getStudents() async {
     final db = await database;
     var response = await db.query("tblStudent");
@@ -254,5 +284,65 @@ class DatabaseProvider {
       var resultMap = response.toList();
       return resultMap.isNotEmpty ? resultMap : null;
     }
+  }
+
+  updateNote(int noteId, String title, String body) async {
+    final db = await database;
+    db.rawUpdate("""
+    UPDATE tblNote\n
+    SET title='$title',body='$body'\n
+    WHERE noteId = $noteId
+    """);
+  }
+
+  deleteNote(int noteId) async {
+    final db = await database;
+    db.rawDelete("""
+    DELETE FROM tblNote\n
+    WHERE noteId = $noteId
+    """);
+  }
+
+  addNewCalendarEvent(CalendarEvent event) async {
+    final db = await database;
+    await db.insert("tblCalendarEvent", event.toMap(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+  Future<dynamic> getCalendarEvents() async {
+    final db = await database;
+    var response = await db.rawQuery("""
+    SELECT *\n
+    FROM tblCalendarEvent\n
+    ORDER BY startTime ASC
+    """);
+    log(response.length.toString());
+    if (response.length == 0)
+      return null;
+    else {
+      var resultMap = response.toList();
+      return resultMap.isNotEmpty ? resultMap : null;
+    }
+  }
+
+  void updateEvent(int eventId, String title, String description,
+      String startTime, String endTime) async {
+    var startTimeDate = DateTime.parse(startTime);
+    var endTimeDate = DateTime.parse(endTime);
+    final db = await database;
+    var res = await db.rawUpdate("""
+    UPDATE tblCalendarEvent\n
+    SET title='$title',description='$description',startTime='$startTimeDate',endTime='$endTimeDate'\n
+    WHERE eventId=$eventId
+    """);
+    log(res.toString());
+  }
+
+  void deleteEvent(int eventId) async {
+    final db = await database;
+    await db.rawDelete("""
+    DELETE FROM tblCalendarEvent\n
+    WHERE eventId = $eventId
+    """);
   }
 }

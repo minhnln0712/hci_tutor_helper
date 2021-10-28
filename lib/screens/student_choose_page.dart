@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_task_planner_app/screens/note_list_page.dart';
+import 'package:flutter_task_planner_app/screens/student_view_page.dart';
 import 'package:flutter_task_planner_app/theme/colors/light_colors.dart';
 import 'package:flutter_task_planner_app/utils/db/database.dart';
 import 'package:flutter_task_planner_app/utils/map_ultis.dart';
@@ -66,7 +68,6 @@ class _ChoosingPageState extends State<ChoosingPage> {
               padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
               child: Column(
                 children: <Widget>[
-                  subheading('Danh Sách Học Sinh'),
                   SizedBox(height: 5.0),
                   Wrap(
                     children: [
@@ -93,16 +94,29 @@ class _ChoosingPageState extends State<ChoosingPage> {
                                                       ["subjectId"]),
                                               builder: (context, subjectData) {
                                                 subjectName = subjectData.data;
-                                                if (subjectName != null) {
+                                                if (subjectName != null &&
+                                                    studentData.data[index]
+                                                            ["status"] ==
+                                                        1) {
                                                   return TextButton(
                                                     onPressed: () {
                                                       if (data["functionID"] ==
                                                           1) {
-                                                        print("func 1");
+                                                        Get.to(() => NoteList(),
+                                                            arguments: {
+                                                              "studentId": studentData
+                                                                          .data[
+                                                                      index]
+                                                                  ["studentId"],
+                                                              "fullName":
+                                                                  studentData.data[
+                                                                          index]
+                                                                      [
+                                                                      "fullName"]
+                                                            });
                                                       } else if (data[
                                                               "functionID"] ==
                                                           2) {
-                                                        print("func 2");
                                                         String address =
                                                             studentData
                                                                     .data[index]
@@ -113,7 +127,43 @@ class _ChoosingPageState extends State<ChoosingPage> {
                                                       }
                                                       if (data["functionID"] ==
                                                           3) {
-                                                        print("func 3");
+                                                        Get.to(
+                                                            () =>
+                                                                StudentDetail(),
+                                                            arguments: {
+                                                              "studentId": studentData
+                                                                          .data[
+                                                                      index]
+                                                                  ["studentId"],
+                                                              "fullName": studentData
+                                                                          .data[
+                                                                      index]
+                                                                  ["fullName"],
+                                                              "address": studentData
+                                                                          .data[
+                                                                      index]
+                                                                  ["address"],
+                                                              "imageLink": studentData
+                                                                          .data[
+                                                                      index]
+                                                                  ["imageLink"],
+                                                              "phone": studentData
+                                                                          .data[
+                                                                      index]
+                                                                  ["phone"],
+                                                              "subjectId": studentData
+                                                                          .data[
+                                                                      index]
+                                                                  ["subjectId"],
+                                                              "subjectName":
+                                                                  subjectName,
+                                                              "gradeId": studentData
+                                                                          .data[
+                                                                      index]
+                                                                  ["gradeId"],
+                                                              "gradeName":
+                                                                  gradeName
+                                                            });
                                                       }
                                                     },
                                                     child: ActiveProjectsCard(
@@ -145,7 +195,7 @@ class _ChoosingPageState extends State<ChoosingPage> {
                             } else if (studentData.hasError) {
                               return Text("");
                             } else {
-                              return Text("Bạn chưa nhập học sinh nào hết!");
+                              return Text("You aren't create any student yet");
                             }
                           })
                     ],
@@ -161,6 +211,7 @@ class _ChoosingPageState extends State<ChoosingPage> {
 
   AppBar _navigator() {
     return AppBar(
+      title: Text("Student List"),
       leading: IconButton(
         icon: Icon(
           Icons.arrow_back_sharp,

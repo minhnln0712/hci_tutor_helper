@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 
 class ActiveProjectsCard extends StatelessWidget {
   final Color cardColor;
@@ -20,7 +19,7 @@ class ActiveProjectsCard extends StatelessWidget {
       flex: 1,
       child: Container(
         padding: EdgeInsets.fromLTRB(20, 20, 20, 15),
-        height: 100,
+        height: 120,
         width: 400,
         decoration: BoxDecoration(
           color: cardColor,

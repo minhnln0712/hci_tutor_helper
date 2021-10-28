@@ -2,7 +2,7 @@ class Note {
   int noteId;
   String title;
   String body;
-  DateTime createDate;
+  String createDate;
   int studentId;
 
   Note({this.noteId, this.title, this.body, this.createDate, this.studentId});

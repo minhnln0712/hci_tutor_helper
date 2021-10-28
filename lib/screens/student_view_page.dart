@@ -251,11 +251,11 @@ class _StudentDetailState extends State<StudentDetail> {
 
   Container buildClassItem(int eventid, String title, String description,
       String startTime, String endTime) {
-    var startTimeStr = startTime.split("T");
+    var startTimeStr = startTime.split(" ");
     String date = startTimeStr[0];
     var fromTimeStr = startTimeStr[1].split(":");
     String fromTime = fromTimeStr[0] + ":" + fromTimeStr[1];
-    var endTimeStr = endTime.split("T");
+    var endTimeStr = endTime.split(" ");
     var toTimeStr = endTimeStr[1].split(":");
     String toTime = toTimeStr[0] + ":" + toTimeStr[1];
     return Container(

@@ -309,6 +309,7 @@ class _CreateEventState extends State<CreateEvent> {
         Get.back();
         Get.back();
         Get.back();
+        Get.back();
       },
     );
     AlertDialog secondAlert = AlertDialog(
@@ -328,14 +329,12 @@ class _CreateEventState extends State<CreateEvent> {
       child: const Text("Create"),
       onPressed: () {
         for (int i = 0; i < classDateTimeData.length; i++) {
-          var date = classDateTimeData[i][0].split("T");
-          String dateStr = date[0];
           var event = CalendarEvent(
               title: title,
               description: description,
               createDate: DateTime.now().toString(),
-              startTime: classDateTimeData[i][0],
-              endTime: classDateTimeData[i][1],
+              startTime: DateTime.parse(classDateTimeData[i][0]).toString(),
+              endTime: DateTime.parse(classDateTimeData[i][1]).toString(),
               studentId: data_from_student_info["studentId"]);
           DatabaseProvider.db.addNewCalendarEvent(event);
         }

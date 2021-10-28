@@ -211,8 +211,12 @@ class _UpdateEventState extends State<UpdateEvent> {
               data_from_student_info["toTime"] +
               ":00";
         }
-        DatabaseProvider.db.updateEvent(data_from_student_info["eventId"],
-            title, description, startTime, endTime);
+        DatabaseProvider.db.updateEvent(
+            data_from_student_info["eventId"],
+            title,
+            description,
+            DateTime.parse(startTime),
+            DateTime.parse(endTime));
         showDialog(
           context: context,
           builder: (BuildContext context) {

@@ -326,13 +326,11 @@ class DatabaseProvider {
   }
 
   void updateEvent(int eventId, String title, String description,
-      String startTime, String endTime) async {
-    var startTimeDate = DateTime.parse(startTime);
-    var endTimeDate = DateTime.parse(endTime);
+      DateTime startTime, DateTime endTime) async {
     final db = await database;
     var res = await db.rawUpdate("""
     UPDATE tblCalendarEvent\n
-    SET title='$title',description='$description',startTime='$startTimeDate',endTime='$endTimeDate'\n
+    SET title='$title',description='$description',startTime='$startTime',endTime='$endTime'\n
     WHERE eventId=$eventId
     """);
     log(res.toString());

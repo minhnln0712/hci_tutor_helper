@@ -6,12 +6,15 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: LightColors.kLightYellow, // navigation bar color
+    statusBarColor: Color(0xffffb969), // status bar color
+  ));
   return runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
   // This widget is the root of your application.
-
   @override
   State<MyApp> createState() => _MyAppState();
 }

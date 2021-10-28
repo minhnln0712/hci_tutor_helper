@@ -252,8 +252,12 @@ class DatabaseProvider {
   deleteStudent(int studentId) async {
     final db = await database;
     await db.rawDelete("""
-    DELETE FROM tblEvent\n
+    DELETE FROM tblCalendarEvent\n
     WHERE studentId = $studentId
+    """);
+    await db.rawDelete("""
+    DELETE FROM tblNote\n 
+    WHERE studentId = $studentId 
     """);
     await db.rawDelete("""
     DELETE FROM tblStudent\n 

@@ -344,6 +344,7 @@ class _StudentDetailState extends State<StudentDetail> {
         Get.back();
         Get.back();
         Get.back();
+        Get.back();
       },
     );
     AlertDialog secondAlert = AlertDialog(

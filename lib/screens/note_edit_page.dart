@@ -72,7 +72,8 @@ class _NoteEditorState extends State<NoteEditor> {
           if (title != oldTitle || body != oldBody) {
             DatabaseProvider.db.updateNote(data["noteId"], title, body);
           }
-          Get.off(() => ChoosingPage());
+          Get.back();
+          Get.back();
         },
       ),
       actions: [
@@ -122,7 +123,8 @@ class _NoteEditorState extends State<NoteEditor> {
     Widget okButton = TextButton(
       child: const Text("OK"),
       onPressed: () {
-        Get.off(() => ChoosingPage());
+        Get.back();
+        Get.back();
       },
     );
     AlertDialog secondAlert = AlertDialog(

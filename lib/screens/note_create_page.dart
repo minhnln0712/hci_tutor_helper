@@ -72,7 +72,8 @@ class _NoteCreateState extends State<NoteCreate> {
                 studentId: data["studentId"]);
             DatabaseProvider.db.addNewNote(newNote);
           }
-          Get.off(() => ChoosingPage());
+          Get.back();
+          Get.back();
         },
       ),
       actions: [],

@@ -125,6 +125,8 @@ class _NoteEditorState extends State<NoteEditor> {
       onPressed: () {
         Get.back();
         Get.back();
+        Get.back();
+        Get.back();
       },
     );
     AlertDialog secondAlert = AlertDialog(

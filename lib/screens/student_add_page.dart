@@ -101,8 +101,10 @@ class _AddStudentState extends State<AddStudent> {
                                 final ImagePicker _picker = ImagePicker();
                                 final XFile image = await _picker.pickImage(
                                     source: ImageSource.gallery);
-                                chooseimage(File(image.path));
-                                imageLink = image.path.toString();
+                                if (image != null) {
+                                  chooseimage(File(image.path));
+                                  imageLink = image.path.toString();
+                                }
                               }, // Handle your callback.
                               splashColor: Colors.brown.withOpacity(0.5),
                               child: imageDisplay,
